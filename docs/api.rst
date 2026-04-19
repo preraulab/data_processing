@@ -1,11 +1,12 @@
 API Reference
 =============
 
-.. mat:module:: .
+.. toctree::
+   :maxdepth: 1
 
-.. mat:autofunction:: consecutive_runs
-.. mat:autofunction:: findclosest
-.. mat:autofunction:: get_chunks
-.. mat:autofunction:: interval_intersect
-.. mat:autofunction:: percentile_filt
-.. mat:autofunction:: pick_from_time_segments
+   api/consecutive_runs
+   api/findclosest
+   api/get_chunks
+   api/interval_intersect
+   api/percentile_filt
+   api/pick_from_time_segments
