@@ -16,7 +16,6 @@ function intersections = interval_intersect(intervals_1, intervals_2)
 %   See also: pick_from_time_segments
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 %Create sets that have all possible types of intersections:
 % Left, Right, Inner, Outer, No-intersection

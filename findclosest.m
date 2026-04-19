@@ -20,7 +20,6 @@ function [vals, inds]=findclosest(A, B)
 %   See also: min, interp1
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 
 %Use fast matrix method for smaller data sets

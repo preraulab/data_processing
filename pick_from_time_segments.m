@@ -14,7 +14,6 @@ function picked_idx = pick_from_time_segments(time_segments, times)
 %   See also: interval_intersect
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 %Use time segments to interpolate logicals on the data
 x=reshape(time_segments',1,numel(time_segments));

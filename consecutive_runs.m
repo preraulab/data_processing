@@ -27,7 +27,6 @@ function [run_lengths, run_inds, filtered_vector] = consecutive_runs(data, min_l
 %   See also: get_chunks, consecutive
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 %Default lengths impose no filtering
 if nargin <2

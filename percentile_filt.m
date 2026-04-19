@@ -18,7 +18,6 @@ function filtered_data = percentile_filt(data, ptile, window_size)
 %   See also: ordfilt2, prctile
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 %Make sure inputs are valid
 % p = inputParser;
