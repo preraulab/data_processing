@@ -2,7 +2,7 @@
 
 Generic signal and index manipulation — consecutive runs, chunk detection, interval arithmetic.
 
-Part of the Prerau Lab [`utils`](https://github.com/preraulab/utils) meta-repository. Can also be used standalone.
+Part of the Prerau Lab [`preraulab_utilities`](https://github.com/preraulab/preraulab_utilities) meta-repository. Can also be used standalone.
 
 ## When to use which
 
