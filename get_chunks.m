@@ -1,14 +1,22 @@
-function [run_lengths, run_inds, run_values, filtered_vector] = get_chunks(data, min_len, max_len)
-%GET_CHUNKS  Extract consecutive runs of equal values from a vector
+function [run_lengths, run_inds, run_values, filtered_vector] = get_chunks(data, min_len, max_len, tol)
+%GET_CHUNKS  Extract consecutive runs of (near-)equal values from a vector
 %
 %   Usage:
 %       [run_lengths, run_inds, run_values, filtered_vector] = get_chunks(data)
 %       [run_lengths, run_inds, run_values, filtered_vector] = get_chunks(data, min_len, max_len)
+%       [run_lengths, run_inds, run_values, filtered_vector] = get_chunks(data, min_len, max_len, tol)
 %
 %   Inputs:
 %       data    : 1xN numeric - input vector -- required
 %       min_len : double - minimum run length (default: 1)
 %       max_len : double - maximum run length (default: inf)
+%       tol     : double - a run extends while its full span (max-min) stays
+%                 within tol. Default 0 = strict equality (isequaln). Use a
+%                 small positive tol to find near-constant runs when the signal
+%                 has been resampled (the anti-alias filter leaves sub-unit
+%                 ringing in flat/disconnected segments, so a genuinely flat run
+%                 is no longer bit-identical - e.g. a 40-min disconnect survives
+%                 as < 50 exactly-equal samples, below any 1-s min_len).
 %
 %   Outputs:
 %       run_lengths     : 1xK double - length of each run
@@ -33,6 +41,10 @@ if nargin<3
     max_len=inf;
 end
 
+if nargin<4
+    tol=0;
+end
+
 %Check for valid lengths
 if min_len>max_len
     error('Min size must be less than or equal to max size');
@@ -53,11 +65,22 @@ cur_run = 0;
 cur_len = 0;
 
 last_val = data(1);
+run_min = data(1); % running span of the current run (used when tol > 0)
+run_max = data(1);
 % Iterate through data vector
 for ii = 1:len
-    if isequaln(data(ii), last_val)
+    % Extend the current run? tol==0 keeps the original strict-equality
+    % (isequaln) behavior; tol>0 extends while the run's span stays <= tol.
+    if tol==0
+        same = isequaln(data(ii), last_val);
+    else
+        same = (max(run_max, data(ii)) - min(run_min, data(ii))) <= tol;
+    end
+    if same
         % Increment current run
         cur_len = cur_len + 1;
+        run_min = min(run_min, data(ii));
+        run_max = max(run_max, data(ii));
     else
         if cur_len >= min_len && cur_len <= max_len
             % End current run
@@ -70,6 +93,8 @@ for ii = 1:len
         % Reset current run
         cur_len = 1;
         last_val = data(ii);
+        run_min = data(ii);
+        run_max = data(ii);
     end
 end
 
